@@ -41,7 +41,7 @@ public class HelloWorld {
 		//1  将需要添加的实体构造成实体对象
 		Article article=new Article(1, "Lucene是全文检索框架", "全文检索（Full-Text Retrieval）是指以文本作为检索对象，找出含有指定词汇的文本。全面、准确和快速是衡量全文检索系统的关键指标。");
 		
-		//2 保存到数据库
+		//2 保存到数据库(此步骤暂时省略)
 		
 		//3 建立索引(lucene)
 		Directory directory=FSDirectory.open(Paths.get("./indexDir/"));  //索引库目录
@@ -77,11 +77,11 @@ public class HelloWorld {
 		Directory directory=FSDirectory.open(Paths.get("./indexDir/"));  //索引库目录
 		Analyzer analyzer=new StandardAnalyzer();		//分词器
 		
-		//1	把查询字符串转为Query对象(只在title中查询)
+		//2.1 把查询字符串转为Query对象(只在title中查询)
 		QueryParser queryParser=new QueryParser("title",analyzer);
 		Query query=queryParser.parse(queryCondition);
 		
-		//2	 执行搜索得到结果
+		//2.2 执行搜索得到结果
 		IndexReader indexReader=DirectoryReader.open(directory);
 		IndexSearcher indexSearcher=new IndexSearcher(indexReader);
 		TopDocs topDocs= indexSearcher.search(query, 100); //返回查询出来的前n条结果
@@ -89,7 +89,7 @@ public class HelloWorld {
 		Integer count= topDocs.totalHits; //总结果数量
 		ScoreDoc[] scoreDocs=topDocs.scoreDocs;  //返回前N条结果信息
 		
-		//3	处理结果
+		//2.3 处理结果
 		for (int i = 0; i < scoreDocs.length; i++) {
 			ScoreDoc scoreDoc=scoreDocs[i];
 			int docId=scoreDoc.doc;
@@ -102,12 +102,10 @@ public class HelloWorld {
 			Article article=new Article(Integer.parseInt(doc.get("id")), doc.get("title"), doc.get("content"));
 			articles.add(article);			
 		}
-		
-		
 		//------------------------------------------------------------
 		
-		//4	控制台显示结果
-		System.err.println("总结果数："+1);
+		//3  控制台显示结果
+		System.err.println("总结果数："+count);
 		for (Article article : articles) {
 			System.out.println("查询结果为："+article);
 		}

@@ -77,7 +77,7 @@ public class ArticleDaoTest {
 	public void testSearchStringIntInt() {	
 		String query="lucene";
 		//分页测试查询
-		SearchResult<Article> searchResult=articleDao.search(query, 20, 10);
+		SearchResult<Article> searchResult=articleDao.search(query, 0, 10);
 		
 		System.err.println("总结果数："+searchResult.getCount());
 		for (Article article : searchResult.getList()) {

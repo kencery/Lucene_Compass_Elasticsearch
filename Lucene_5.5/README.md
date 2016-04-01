@@ -25,7 +25,7 @@
 4. 创建包(com.lyzj.kencery.dao),在包下创建ArticleDao类(对文章进行增删改查封装操作)
 5. 创建包(com.lyzj.kencery.unit),在包下创建ArticleDaoTest类(测试ArticleDao的方法是否正确)
  
-## 3 Lucene(IndexWriter(多线程),IndexSearcher(实时更新))问题(Article)
+## 3 Lucene(IndexWriter(多线程),IndexSearcher(实时更新))
 ######  *分支为`three`(IndexWriter(多线程),IndexSearcher(实时更新)),* 
 #### (1):在项目Lucene_5.5下进行操作
 1. 在包(com.lyzj.kencery.unit)下创建IndexWriterTest类(对于同一个索引库，只能有一个打开的有效的IndexWriter，如果有多个则抛出异常)，抛出问题

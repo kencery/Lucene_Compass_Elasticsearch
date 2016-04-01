@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -21,6 +17,7 @@ import com.lyzj.kencery.domain.Article;
 import com.lyzj.kencery.domain.SearchResult;
 import com.lyzj.kencery.util.ArticleDocumentUtils;
 import com.lyzj.kencery.util.Configuration;
+import com.lyzj.kencery.util.LuceneUtils;
 
 /**
  * lucene对索引完整的增删改查
@@ -36,22 +33,13 @@ public class ArticleDao {
 	public void save(Article article){
 		//1 把Article转为Document
 		Document document=ArticleDocumentUtils.articleToDocument(article);
-	
 		//2 保存到索引库中
-		IndexWriterConfig iwc= new IndexWriterConfig(Configuration.getAnalyzer());
-		
-		IndexWriter indexWriter = null;
 		try {
-			indexWriter = new IndexWriter(Configuration.getDirectory(), iwc);
-			indexWriter.addDocument(document);
+			LuceneUtils.getIndexWriter().addDocument(document);
+			LuceneUtils.getIndexWriter().commit();
+			LuceneUtils.indexChanged();
 		} catch (IOException e) {
 			throw new RuntimeException();
-		}finally{
-			try {
-				indexWriter.close();
-			} catch (IOException e) {
-				throw new RuntimeException();
-			}
 		}
 	}
 	
@@ -60,22 +48,15 @@ public class ArticleDao {
 	 * @param id	删除的Id
 	 */
 	public void delete(Integer id){
-		IndexWriterConfig iwc= new IndexWriterConfig(Configuration.getAnalyzer());
-		IndexWriter indexWriter = null;
 		try {
 			//Term就是指定字段中的一个关键词
 			Term term=new Term("id",id.toString());
-			indexWriter = new IndexWriter(Configuration.getDirectory(), iwc);
 			//删除含有指定Term的所有Document
-			indexWriter.deleteDocuments(term);
+			LuceneUtils.getIndexWriter().deleteDocuments(term);
+			LuceneUtils.getIndexWriter().commit();
+			LuceneUtils.indexChanged();
 		} catch (IOException e) {
 			throw new RuntimeException();
-		}finally{
-			try {
-				indexWriter.close();
-			} catch (IOException e) {
-				throw new RuntimeException();
-			}
 		}
 	}
 	
@@ -88,22 +69,15 @@ public class ArticleDao {
 		Document document=ArticleDocumentUtils.articleToDocument(article);
 		
 		//2 修改到索引库中
-		IndexWriterConfig iwc= new IndexWriterConfig(Configuration.getAnalyzer());
-		IndexWriter indexWriter = null;
 		try {
 			//Term就是指定字段中的一个关键词
 			Term term=new Term("id",article.getId().toString());
-			indexWriter = new IndexWriter(Configuration.getDirectory(), iwc);
 			//更新索引就是先删除，在创建
-			indexWriter.updateDocument(term, document);
+			LuceneUtils.getIndexWriter().updateDocument(term, document);
+			LuceneUtils.getIndexWriter().commit();
+			LuceneUtils.indexChanged();
 		} catch (IOException e) {
 			throw new RuntimeException();
-		}finally{
-			try {
-				indexWriter.close();
-			} catch (IOException e) {
-				throw new RuntimeException();
-			}
 		}
 	}
 	
@@ -114,7 +88,6 @@ public class ArticleDao {
 	 * @return 返回一段数据+总结果数量
 	 */
 	public SearchResult<Article> search(String	querySearch,int maxResult){
-		IndexReader indexReader=null;
 		try {
 			//1 把查询字符串转换为Query对象
 			//  >>默认只在"title"中搜索
@@ -123,10 +96,7 @@ public class ArticleDao {
 			QueryParser queryParser = new MultiFieldQueryParser(new String[] {
 					"title", "content" }, Configuration.getAnalyzer());
 			Query query = queryParser.parse(querySearch);
-			//2 执行查询得到中间结果
-			 indexReader= DirectoryReader.open(Configuration
-					.getDirectory());
-			 IndexSearcher indexSearcher= new IndexSearcher(indexReader);
+			IndexSearcher indexSearcher=LuceneUtils.getIndexSearcher();
 			TopDocs topDocs = indexSearcher.search(query, maxResult);
 			int count = topDocs.totalHits;
 			ScoreDoc[] scoreDocs = topDocs.scoreDocs;
@@ -143,12 +113,6 @@ public class ArticleDao {
 			return new SearchResult<Article>(count, list);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}finally{
-			try {
-				indexReader.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
 		}
 	}
 	
@@ -160,7 +124,6 @@ public class ArticleDao {
 	 * @return	返回一段数据+总结果数量
 	 */
 	public SearchResult<Article> search(String	querySearch,int firstResult,int maxResult){
-		IndexReader indexReader=null;
 		try {
 			//1 把查询字符串转换为Query对象
 			//  >>希望能在"title"和"content"中搜索
@@ -168,9 +131,7 @@ public class ArticleDao {
 					"title", "content" }, Configuration.getAnalyzer());
 			Query query = queryParser.parse(querySearch);
 			//2 执行查询得到中间结果
-			indexReader= DirectoryReader.open(Configuration
-					.getDirectory());
-			IndexSearcher indexSearcher= new IndexSearcher(indexReader);
+			IndexSearcher indexSearcher=LuceneUtils.getIndexSearcher();
 			
 			TopDocs topDocs = indexSearcher.search(query, firstResult+maxResult);
 			int count = topDocs.totalHits;
@@ -189,12 +150,6 @@ public class ArticleDao {
 			return new SearchResult<Article>(count, list);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}finally{
-			try {
-				indexReader.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
 		}
 	}
 }

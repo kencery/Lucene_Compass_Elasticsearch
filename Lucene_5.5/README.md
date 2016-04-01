@@ -19,10 +19,19 @@
 ## 2 对Lucene进行增删改查(Article)
 #######  *分支为`two`(增删改查动作),第二个程序，实现完整的增删改查* 
 #### (1):在项目Lucene_5.5下进行操作
-1. 在包(com.lyzj.kencery.domain)下面创建SearchResult泛型实体类(封装lucene查询返回的实体对象)
-2. 创建包(com.lyzj.kencery.util),在包下面创建ArticleDocumentUtils类(lucene辅助类)
+1. 在包(com.lyzj.kencery.domain)下创建SearchResult泛型实体类(封装lucene查询返回的实体对象)
+2. 创建包(com.lyzj.kencery.util),在包下创建ArticleDocumentUtils类(lucene辅助类)
 3. 在包(com.lyzj.kencery.util)下创建Configuration类(配置文件(配置索引路径和分词法))
-4. 创建包(com.lyzj.kencery.dao),在包下面创建ArticleDao类(对文章进行增删改查封装操作)
-5. 创建包(com.lyzj.kencery.unit),在包下面创建ArticleDaoTest类(测试ArticleDao的方法是否正确)
+4. 创建包(com.lyzj.kencery.dao),在包下创建ArticleDao类(对文章进行增删改查封装操作)
+5. 创建包(com.lyzj.kencery.unit),在包下创建ArticleDaoTest类(测试ArticleDao的方法是否正确)
+ 
+## 3 Lucene(IndexWriter(多线程),IndexSearcher(实时更新))问题(Article)
+######  *分支为`three`(IndexWriter(多线程),IndexSearcher(实时更新)),* 
+#### (1):在项目Lucene_5.5下进行操作
+1. 在包(com.lyzj.kencery.unit)下创建IndexWriterTest类(对于同一个索引库，只能有一个打开的有效的IndexWriter，如果有多个则抛出异常)，抛出问题
+2. 在包(com.lyzj.kencery.util)下创建LuceneUtils类(专门用单例模式来维护IndexWriter类)，解决IndexWriter、IndexSearcher
+3. 修改包(com.lyzj.kencery.dao)下的ArticleDao的增删改方法，调用LuceneUtils实例化IndexWriter
+4. 在包(com.lyzj.kencery.unit)下创建IndexSearchTest类(测试IndexSearcher，实时更新,跟踪状态)
     
-### *1为一个项目，2,3为同一个项目*
+    
+### *1为一个案例，2,3为同一个案例*

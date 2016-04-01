@@ -29,7 +29,6 @@ public class Article {
 	 * @param content
 	 */
 	public Article(Integer id, String title, String content) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;

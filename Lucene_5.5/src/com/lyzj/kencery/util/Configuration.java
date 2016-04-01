@@ -28,8 +28,11 @@ public class Configuration {
 	static{
 		//初始化配置，应通过读取配置文件(config.properties),暂时写死
 		try {
+			System.err.println(5555);
 			directory=FSDirectory.open(Paths.get("./indexDir/"));
+			System.err.println(6666);
 			analyzer=new StandardAnalyzer();	
+			System.err.println(7777);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

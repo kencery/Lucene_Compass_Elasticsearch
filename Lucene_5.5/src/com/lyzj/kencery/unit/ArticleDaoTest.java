@@ -1,7 +1,5 @@
 package com.lyzj.kencery.unit;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import com.lyzj.kencery.dao.ArticleDao;

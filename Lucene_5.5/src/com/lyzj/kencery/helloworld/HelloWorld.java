@@ -1,6 +1,5 @@
 package com.lyzj.kencery.helloworld;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +36,11 @@ public class HelloWorld {
 	 * @throws IOException 
 	 */
 	@Test
-	public void testCreateIndex() throws IOException {
+	public void testCreateIndex() throws Exception {
 		//1  将需要添加的实体构造成实体对象
-		Article article=new Article(1, "Lucene是全文检索框架", "全文检索（Full-Text Retrieval）是指以文本作为检索对象，找出含有指定词汇的文本。全面、准确和快速是衡量全文检索系统的关键指标。");
+		Article article=new Article(1, "Lucene是全文检索框架", 
+				"全文检索（Full-Text Retrieval）是指以文本作为检索对象，找出含有指定词汇的文本。" +
+				"全面、准确和快速是衡量全文检索系统的关键指标。");
 		
 		//2 保存到数据库(此步骤暂时省略)
 		
@@ -49,10 +50,20 @@ public class HelloWorld {
 		IndexWriterConfig iwc= new IndexWriterConfig(analyzer);
 		
 		// >>3.1   将Article转为Document
+		/** Store参数说明
+			No 本字段的原始值不存储
+			YES 本字段的原始值会存在出在数据库区中
+		如果不存在出，则搜索出来的结果中这个字段的值为null */
+		
+		/** 
+	     * 自Lucene4开始 创建field对象使用不同的类型 只需要指定是否需要保存源数据 不需指定分词类别  
+	     * 之前版本的写法如下  
+	     * doc.Add(new Field("id", article.id.ToString(), Field.Store.YES, Field.Index.ANALYZED)); 
+	     */
 		Document doc=new Document();
 		doc.add(new TextField("id", article.getId().toString(), Store.YES));
 		doc.add(new TextField("title", article.getTitle(), Store.YES));
-		doc.add(new TextField("content", article.getContent(), Store.YES));
+		doc.add(new TextField("content", article.getContent(), Store.NO));
 		
 		// >>3.2 保存到索引库中
 		IndexWriter indexWriter=new IndexWriter(directory,iwc);
@@ -73,7 +84,6 @@ public class HelloWorld {
 		List<Article> articles=new ArrayList<Article>();
 		
 		//--------------------------搜索代码-----------------------------
-		
 		Directory directory=FSDirectory.open(Paths.get("./indexDir/"));  //索引库目录
 		Analyzer analyzer=new StandardAnalyzer();		//分词器
 		

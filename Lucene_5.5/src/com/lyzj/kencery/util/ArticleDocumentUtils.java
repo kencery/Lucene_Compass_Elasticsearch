@@ -20,7 +20,6 @@ public class ArticleDocumentUtils {
 	 */
 	public static Document articleToDocument(Article article){
 		Document document=new Document();
-		
 		document.add(new TextField("id", article.getId().toString(),Store.YES));
 		document.add(new TextField("title",article.getTitle(),Store.YES));
 		document.add(new TextField("content",article.getContent(),Store.YES));

@@ -29,14 +29,10 @@
 2. 在包(com.lyzj.kencery.util)下创建LuceneUtils类(专门用单例模式来维护IndexWriter类)，解决IndexWriter、IndexSearcher
 3. 修改包(com.lyzj.kencery.dao)下的ArticleDao的增删改方法，调用LuceneUtils实例化IndexWriter
 4. 在包(com.lyzj.kencery.unit)下创建IndexSearchTest类(测试IndexSearcher，实时更新,跟踪状态)
-
-## 4 Lucene优化
+## 4 Lucene优化(合并文件(不建议在项目中使用))
 ######  *分支为`four`(合并生成的文件),* 
 #### (1):在项目Lucene_5.5下进行操作
 1. 在包(com.lyzj.kencery.unit)下创建OptiomizeTest类(测试合并生成的文件，减少文件操作(IO))
-2. 
+2. 所有详细信息参看项目中的备注说明。
 
-3. 修改包(com.lyzj.kencery.dao)下的ArticleDao的增删改方法，调用LuceneUtils实例化IndexWriter
-4. 在包(com.lyzj.kencery.unit)下创建IndexSearchTest类(测试IndexSearcher，实时更新,跟踪状态)   
-    
-### *1为一个案例，2,3为同一个案例*
+### *1为一个案例，2、3、4为同一个案例*

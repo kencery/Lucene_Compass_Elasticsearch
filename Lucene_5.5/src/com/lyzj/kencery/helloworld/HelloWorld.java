@@ -21,6 +21,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.junit.Test;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import com.lyzj.kencery.domain.Article;
 
@@ -46,7 +47,7 @@ public class HelloWorld {
 		
 		//3 建立索引(lucene)
 		Directory directory=FSDirectory.open(Paths.get("./indexDir/"));  //索引库目录
-		Analyzer analyzer=new StandardAnalyzer();		//分词器
+		Analyzer analyzer=new IKAnalyzer();		//分词器
 		IndexWriterConfig iwc= new IndexWriterConfig(analyzer);
 		
 		// >>3.1   将Article转为Document
@@ -63,7 +64,7 @@ public class HelloWorld {
 		Document doc=new Document();
 		doc.add(new TextField("id", article.getId().toString(), Store.YES));
 		doc.add(new TextField("title", article.getTitle(), Store.YES));
-		doc.add(new TextField("content", article.getContent(), Store.NO));
+		doc.add(new TextField("content", article.getContent(), Store.YES));
 		
 		// >>3.2 保存到索引库中
 		IndexWriter indexWriter=new IndexWriter(directory,iwc);

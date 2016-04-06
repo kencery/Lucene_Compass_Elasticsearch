@@ -41,7 +41,7 @@
 2. 所有详细信息参看项目中的备注说明。
 
 ## 5 分词器
-*分支为`lucene_five`(分词法，)* 
+*分支为`lucene_five`(分词法)* 
 #### (1):在项目Lucene_5.5下进行操作
 1. 建立索引与搜索都可能会用到分词器，因使用同一个，否则可能会搜索不到结果
 2. 在包(com.lyzj.kencery.unit)下创建AnalyzerTest类(测试分词器，在类下面有详细的说明，请参考)
@@ -49,8 +49,10 @@
 4. 将IKAnalyzer包下面的ext.dic和stopword.dic以及IKAnalyzer.cfg.xml文件拷贝到项目根目录下，进行修改
 5. 测试的分词法含有：StandardAnalyzer、CJKAnalyzer、IKAnalyzer。
 
-
-
+## 5 高亮
+*分支为`lucene_six`(高亮，作用是生成一段摘要，把摘要中的关键词高亮显示)* 
+#### (1):在项目Lucene_5.5下进行操作
+1. 在包(com.lyzj.kencery.unit)下创建HighlightTest类(高亮，在类下面有详细的说明，请参考)
 
 
 

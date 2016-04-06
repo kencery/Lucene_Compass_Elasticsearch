@@ -49,7 +49,7 @@
 4. 将IKAnalyzer包下面的ext.dic和stopword.dic以及IKAnalyzer.cfg.xml文件拷贝到项目根目录下，进行修改
 5. 测试的分词法含有：StandardAnalyzer、CJKAnalyzer、IKAnalyzer。
 
-## 5 高亮
+## 6 高亮
 *分支为`lucene_six`(高亮，作用是生成一段摘要，把摘要中的关键词高亮显示)* 
 #### (1):在项目Lucene_5.5下进行操作
 1. 在包(com.lyzj.kencery.unit)下创建HighlightTest类(高亮，在类下面有详细的说明，请参考)
@@ -58,4 +58,4 @@
 
 
 
-### *1为一个案例，2、3、4、5为同一个案例*
+### *1为一个案例，2、3、4、5、6为同一个案例*

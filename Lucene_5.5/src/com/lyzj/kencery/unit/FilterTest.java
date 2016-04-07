@@ -23,8 +23,9 @@ import com.lyzj.kencery.util.Configuration;
 /**
  * 过滤
  * @author kencery
- *
+ * 强迫症伤不起
  */
+@SuppressWarnings("deprecation") 
 public class FilterTest {
 	
 	/**

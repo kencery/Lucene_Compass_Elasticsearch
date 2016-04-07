@@ -12,6 +12,9 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.util.BytesRef;
+import org.apache.lucene.util.BytesRefBuilder;
+import org.apache.lucene.util.NumericUtils;
 
 import com.lyzj.kencery.domain.Article;
 import com.lyzj.kencery.domain.SearchResult;
@@ -50,7 +53,9 @@ public class ArticleDao {
 	public void delete(Integer id){
 		try {
 			//Term就是指定字段中的一个关键词
-			Term term=new Term("id",id.toString());
+			BytesRefBuilder bytes = new BytesRefBuilder();
+            NumericUtils.intToPrefixCoded(id, 0, bytes);
+			Term term=new Term("id",bytes);
 			//删除含有指定Term的所有Document
 			LuceneUtils.getIndexWriter().deleteDocuments(term);
 			LuceneUtils.getIndexWriter().commit();
@@ -70,8 +75,10 @@ public class ArticleDao {
 		
 		//2 修改到索引库中
 		try {
+			BytesRefBuilder bytes = new BytesRefBuilder();
+            NumericUtils.intToPrefixCoded(article.getId(), 0, bytes);
 			//Term就是指定字段中的一个关键词
-			Term term=new Term("id",article.getId().toString());
+			Term term=new Term("id",bytes);
 			//更新索引就是先删除，在创建
 			LuceneUtils.getIndexWriter().updateDocument(term, document);
 			LuceneUtils.getIndexWriter().commit();

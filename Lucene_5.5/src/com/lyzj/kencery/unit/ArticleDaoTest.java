@@ -50,7 +50,7 @@ public class ArticleDaoTest {
 	 */
 	@Test
 	public void testUpdate() {
-		Article article=new Article(1, "Lucene是全文检索框架", 
+		Article article=new Article(2, "Lucene是全文检索框架", 
 				"这是更新后的索引信息，全文检索（Full-Text Retrieval）是指以文本作为检索对象，找出含有指定词汇的文本。全面、准确和快速是衡量全文检索系统的关键指标。");
 		articleDao.update(article);
 	}

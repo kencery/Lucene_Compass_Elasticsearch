@@ -43,10 +43,7 @@ public class HighlightTest {
 	}
 	
 	/**
-	 * 测试搜索
-	 * @throws Exception
-	 */
-	/**
+	 * 高亮显示
 	 * @throws Exception
 	 */
 	@Test

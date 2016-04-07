@@ -35,7 +35,7 @@ import com.lyzj.kencery.util.LuceneUtils;
 public class SortTest {
 	
 	/**
-	 * 吐槽lucene网址：http://ju.outofmemory.cn/entry/217369
+	 * 吐槽lucene：http://ju.outofmemory.cn/entry/217369
 	 * 测试权重信息(给需要添加的值信息设置高权重)
 	 * 使用备注等都在ArticleDocumentUtils类下的articleToDocument中含有说明
 	 * @throws Exception

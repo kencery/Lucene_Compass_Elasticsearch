@@ -2,6 +2,7 @@ package com.lyzj.kencery.util;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.IntField;
 import org.apache.lucene.document.NumericDocValuesField;
 import org.apache.lucene.document.SortedDocValuesField;
 import org.apache.lucene.document.TextField;
@@ -24,7 +25,11 @@ public class ArticleDocumentUtils {
 	public static Document articleToDocument(Article article){
 		Document document=new Document();
 		
-		document.add(new TextField("id", article.getId().toString(),Store.YES));
+		/*
+		 * 将这里使用IntField类型方便后面使用int类型查询，在FilterTest的时候修改为Int类型，所以不需要做时间转换
+		 * 不过这里变化则所有的删除修改的Id都需要转换成int类型
+		 */
+		document.add(new IntField("id", article.getId(),Store.YES));
 		/*
 		 * 测试方法为：SortTest下的testSearch
 		 * 使用一个NumericDocValuesField索引专用字段用来保存需要索引的字段,然后在搜索的时候使用，

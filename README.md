@@ -1,3 +1,5 @@
+![版权所有](http://pic.cnblogs.com/avatar/a359161.png?id=01220003)
+
 # Lucene(全文检索)和Compass完整案例
 1. 开发环境(MyEclipse10.7，Lucene_5.5.0包)
 2. lucene项目Demo为Lucene_5.5，在项目下面有详细的readme.md说明文档

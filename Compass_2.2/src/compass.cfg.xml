@@ -1,0 +1,21 @@
+<compass-core-config xmlns="http://www.compass-project.org/schema/core-config"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.compass-project.org/schema/core-config
+           http://www.compass-project.org/schema/compass-core-config-2.2.xsd">
+
+	<compass name="default">
+		<!-- 索引库位置 -->
+		<connection>
+			<file path="./indexDir/"/>
+		</connection>
+   		<!-- 导入映射配置 -->
+		<mappings>
+			<class name="com.lyzj.compass.domain.Article" />
+		</mappings>
+   
+   		<!-- 其它配置 -->
+		<!-- <settings>
+			<setting name="" value="" />
+		</settings> -->
+	</compass>
+</compass-core-config>   

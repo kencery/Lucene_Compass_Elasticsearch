@@ -6,20 +6,20 @@
 3. Compass——>lucene——>索引库   相当于Hibernate——>JDBC——>数据库
 4. CompassAPI框架代码以及XML配置
 ```java
-  CompassConfiguration ccfg=new CompassConfiguration().Configure(); //compass.cfg.xml
-  CompassSessionFactory csf=ccfg.buildCompass();
-  
-  CompassSession session=csf.openSession();
-  try{
-      CompassTransaction ctx=session.beginTransaction();
-      //操作,增(create，建立索引)删(delete)改(save)查(get/load)
-      ctx.commit();
-  }catch(Exception e){
-  	session.getTransaction().rollback();
-  	throw new Exception(e);
-  }finally{
-  	session.close();
-  }
+	java代码思路
+		CompassConfiguration ccfg=new CompassConfiguration().Configure(); //compass.cfg.xml
+		CompassSessionFactory csf=ccfg.buildCompass();
+		CompassSession session=csf.openSession();
+		try{
+			CompassTransaction ctx=session.beginTransaction();
+			//操作,增(create，建立索引)删(delete)改(save)查(get/load)
+			ctx.commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			throw new Exception(e);
+		}finally{
+			session.close();
+		}
   xml配置：
 	1.主配置文件 compass.cfg.xml
   		索引库信息(路径)

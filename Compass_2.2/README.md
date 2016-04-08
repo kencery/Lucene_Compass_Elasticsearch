@@ -1,6 +1,5 @@
-# Compass_2.2简单说明
+# 1.Compass_2.2简单说明
 *分支为`compass_one`(对compass的简单说明)*
-
 1. Compass的jar包已停止更新(compass2.2)，只支持lucene2.4，而lucene现在最新的版本为5.5，版本更新优化了性能等各方各面，故而Compass的包只支持lucene2.4,所以这里只是用来学习一下。
 2. 网站介绍：http://yufenfei.iteye.com/blog/1683546
 3. Compass——>lucene——>索引库   相当于Hibernate——>JDBC——>数据库

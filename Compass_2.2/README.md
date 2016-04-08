@@ -45,11 +45,7 @@
     * compass-2.2.0.jar
     * commons-logging.jar
 5. 在项目src目录下创建配置文件compass.cfg.xml,配置compass
-
-
-3. 创建包(com.lyzj.kencery.helloworld)，在包下面创建HelloWorld测试类，创建两个方法(建立索引和测试搜索)
-4. 在项目下创建lib目录，用来存放jar包(compass和lucene包) 
-
+6. 创建包(com.lyzj.kencery.helloworld)，在包下面创建HelloWorld测试类，创建两个方法(建立索引和测试搜索)
 
 
 

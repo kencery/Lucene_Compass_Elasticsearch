@@ -47,6 +47,14 @@
 5. 在项目src目录下创建配置文件compass.cfg.xml,配置compass
 6. 创建包(com.lyzj.kencery.helloworld)，在包下面创建HelloWorld测试类，创建两个方法(建立索引和测试搜索)
 
+## 3 对Compass进行增删改查(Article)
+*分支为`compass_two`(增删改查动作),封装完整的增删改查* 
+#### (1):在项目Compass_2.2下进行操作
+1. 创建包(com.lyzj.compass.dao),在包下面创建ArticleDao类(使用Compass对文章进行增删改查封装操作)
+2. 创建包(com.lyzj.compass.util),再包下面创建CompassUtil类(维护Compass的全局资源)
+3. 创建包(com.lyzj.compass.unit)，在包下面创建ArticleDaoTest(测试ArticleDao类是否没有问题)
+
+
 
 
 

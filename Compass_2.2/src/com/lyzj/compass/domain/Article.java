@@ -3,6 +3,7 @@ package com.lyzj.compass.domain;
 import org.compass.annotations.Index;
 import org.compass.annotations.Searchable;
 import org.compass.annotations.SearchableId;
+import org.compass.annotations.SearchableProperty;
 import org.compass.annotations.Store;
 
 /**
@@ -22,13 +23,13 @@ public class Article {
 	/**
 	 * 文章标题
 	 */
-	@SearchableId(name="title",store=Store.YES,index=Index.ANALYZED)
+	@SearchableProperty(name="title",store=Store.YES,index=Index.ANALYZED)
 	private String title;
 	
 	/**
 	 * 文章内容
 	 */
-	@SearchableId(name="content",store=Store.YES,index=Index.ANALYZED)
+	@SearchableProperty(name="content",store=Store.YES,index=Index.ANALYZED)
 	private String content;
 
 	/**

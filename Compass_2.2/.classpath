@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/compass-2.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/compass-2.2.0.jar" sourcepath="E:/student/Lucene/compass-2.2.0/src"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-highlighter.jar"/>

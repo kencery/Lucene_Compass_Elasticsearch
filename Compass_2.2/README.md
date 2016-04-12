@@ -54,7 +54,12 @@
 2. 创建包(com.lyzj.compass.util),再包下面创建CompassUtil类(维护Compass的全局资源)
 3. 创建包(com.lyzj.compass.unit)，在包下面创建ArticleDaoTest(测试ArticleDao类是否没有问题)
 
-
+## 4 分词器和高亮
+*分支为`compass_three`(分词器和高亮的使用)* 
+#### (1):在项目Compass_2.2下进行操作
+1. 在ArticleDao下面的search方法中添加高亮显示实现的代码
+2. 在compass.cfg.xml配置细节(摘要大小，高亮器，分词器)
+3. 添加极易分词器je-analysis-1.5.3.jar，支持lucene2.4
 
 
 

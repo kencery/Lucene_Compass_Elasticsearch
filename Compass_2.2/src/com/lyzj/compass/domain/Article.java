@@ -2,6 +2,7 @@ package com.lyzj.compass.domain;
 
 import org.compass.annotations.Index;
 import org.compass.annotations.Searchable;
+import org.compass.annotations.SearchableBoostProperty;
 import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;
 import org.compass.annotations.Store;
@@ -17,7 +18,7 @@ public class Article {
 	/**
 	 * 文章Id
 	 */
-	@SearchableId(name="id")   /*唯一标示符*/
+	@SearchableId(name="id",format="00000000")   /*唯一标示符*/
 	private Integer id;
 	
 	/**
@@ -32,6 +33,9 @@ public class Article {
 	@SearchableProperty(name="content",store=Store.YES,index=Index.ANALYZED)
 	private String content;
 
+	@SearchableBoostProperty
+	private float boostValue=1;
+	
 	/**
 	 * 需要设置无参构造函数，否则会报错
 	 */
@@ -74,10 +78,17 @@ public class Article {
 		this.content = content;
 	}
 
+	public float getBoostValue() {
+		return boostValue;
+	}
+
+	public void setBoostValue(float boostValue) {
+		this.boostValue = boostValue;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", content="
-				+ content + "]";
+				+ content + ", boostValue=" + boostValue + "]";
 	}
-
 }

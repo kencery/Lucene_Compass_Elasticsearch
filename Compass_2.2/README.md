@@ -67,9 +67,12 @@
 1. 修改类Article实体，添加boostValue属性(boost属性值)
 2. 在包(com.lyzj.compass.unit)下面创建SortTest测试类，进行测试排序
 
+## 5 各种查询
+*分支为`compass_five`(各种查询)* 
+#### (1):在项目Compass_2.2下进行操作
+1. 在包(com.lyzj.compass.unit)下面创建QueryTest测试类，进行各种各样查询实现，详细信息请看备注
 
-
-###### Compass已不建议使用，官方已停止更新。
+###### Compass不建议使用，官方已停止更新。本实例为学习使用，详细备注请看代码
 
 
 

@@ -61,6 +61,15 @@
 2. 在compass.cfg.xml配置细节(摘要大小，高亮器，分词器)
 3. 添加极易分词器je-analysis-1.5.3.jar，支持lucene2.4
 
+## 5 排序和过滤
+*分支为`compass_four`(排序和过滤)* 
+#### (1):在项目Compass_2.2下进行操作
+1. 修改类Article实体，添加boostValue属性(boost属性值)
+2. 在包(com.lyzj.compass.unit)下面创建SortTest测试类，进行测试排序
+
+
+
+###### Compass已不建议使用，官方已停止更新。
 
 
 

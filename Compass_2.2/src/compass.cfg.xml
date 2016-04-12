@@ -14,8 +14,17 @@
 		</mappings>
    
    		<!-- 其它配置 -->
-		<!-- <settings>
-			<setting name="" value="" />
-		</settings> -->
+		<settings>
+			<!-- 配置高梁其，摘要大小 -->
+			<setting name="compass.engine.highlighter.default.fragmenter.simple.size" value="20" />
+			<!-- 配置高亮器：前缀 -->
+			<setting name="compass.engine.highlighter.default.formatter.simple.pre" value="&lt;span class='keyword'&gt;" />
+			<!-- 配置高亮器：后缀 -->
+			<setting name="compass.engine.highlighter.default.formatter.simple.post" value="&lt;/span&gt;" />
+			
+			<!-- 配置分词器(词库分词) -->
+			<setting name="compass.engine.analyzer.default.type" value="jeasy.analysis.MMAnalyzer"/>
+		
+		</settings>
 	</compass>
 </compass-core-config>   

@@ -88,9 +88,19 @@ public class ArticleDao {
 			List<Article> articles=new ArrayList<Article>();
 			
 			int endIndex=Math.min(firstResult+maxResult,count);
-			
 			for (int i = firstResult; i < endIndex; i++) {   //只取一段数据
 				Article article=(Article) hits.data(i);
+				
+				//-------------------------------高亮动作------------------------------
+				
+				//做高亮操作，返回高亮后的文本，如果当前高亮的字段中没有出现关键字，返回null
+				String content=hits.highlighter(i).fragment("content");
+				if(content!=null){
+					article.setContent(content);
+				}
+				
+				//------------------------------------------------------------------
+				
 				articles.add(article);
 			}
 	

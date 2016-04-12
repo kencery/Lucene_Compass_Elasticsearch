@@ -62,9 +62,9 @@ public class ArticleDaoTest {
 	 */
 	@Test
 	public void testSearchStringIntInt() {	
-		String query="lucene";
+		String query="对象";
 		//分页测试查询
-		SearchResult<Article> searchResult=articleDao.search(query, 1, 10);
+		SearchResult<Article> searchResult=articleDao.search(query, 0, 10);
 		
 		System.out.println("总结果数："+searchResult.getCount());
 		for (Article article : searchResult.getList()) {

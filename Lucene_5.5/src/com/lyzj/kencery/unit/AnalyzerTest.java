@@ -6,6 +6,7 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
@@ -94,7 +95,7 @@ public class AnalyzerTest {
 	    
 	    //问题说明：这里需要使用jdk1.7,如果使用jdk1.8或者jdk1.6则会出现报错信息
 	    //>>如果大家谁有相应的解决方案，请提交到git上我将会合并或者添加我的QQ我们互相讨论
-	    //CharTermAttribute charTermAttribute= tokenStream.addAttribute(CharTermAttribute.class);
+	    CharTermAttribute charTermAttribute= tokenStream.addAttribute(CharTermAttribute.class);
 	    
 	    //表示token词典类别信息，默认为“Word”，比如I'm就属于<APOSTROPHE>，有撇号的类型；
 	    TypeAttribute typeAttribute = tokenStream.addAttribute(TypeAttribute.class);
@@ -108,7 +109,7 @@ public class AnalyzerTest {
 	      }
 	      int startOffset = offsetAttribute.startOffset();
 	      int endOffset = offsetAttribute.endOffset();
-	      String term ="输出结果为： charTermAttribute.toString()";
+	      String term ="输出结果为："+ charTermAttribute.toString();
 	      System.out.println("第"+position+"个分词，分词内容是:[" + term + "]" + "，分词内容的开始结束位置为：(" + startOffset + "-->" + endOffset + ")，类型是：" + typeAttribute.type());
 	    }
 	    tokenStream.close();

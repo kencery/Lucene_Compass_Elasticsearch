@@ -14,12 +14,15 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.NumericRangeFilter;
 import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PhraseQuery;
+import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.RegexpQuery;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.BooleanClause.Occur;
+import org.apache.lucene.search.spans.SpanQuery;
 import org.junit.Test;
 
 import com.lyzj.kencery.domain.Article;
@@ -63,7 +66,7 @@ public class QueryTest {
 		IndexReader indexReader=DirectoryReader.open(Configuration.getDirectory());
 		IndexSearcher indexSearcher=new IndexSearcher(indexReader);
 		
-		TopDocs topDocs= indexSearcher.search(query, 100);  //返回查询出来的前n条结果
+		TopDocs topDocs= indexSearcher.search(query,100 );  //返回查询出来的前n条结果
 		
 		Integer count= topDocs.totalHits; //总结果数量
 		ScoreDoc[] scoreDocs=topDocs.scoreDocs;  //返回前N条结果信息
@@ -89,11 +92,21 @@ public class QueryTest {
 	}
 
 	/**
-	 * 范围查询
+	 * 范围查询   完
 	 */
 	@Test
 	public void testNumericRangeQuery() {
 		Query query=NumericRangeQuery.newIntRange("id", 5, 15, true, false);
+		searchAndShowResult(query);
+	}
+	
+	/**
+	 * 前缀查询 完
+	 */
+	@Test
+	public void testPrefixQuery(){
+		Term term=	new Term("content","这是");
+		PrefixQuery query=new PrefixQuery(term);
 		searchAndShowResult(query);
 	}
 	
@@ -107,7 +120,7 @@ public class QueryTest {
 	}
 	
 	/**
-	 * 通配符查询
+	 * 通配符查询 完
 	 * ？ 标识一个任意字符
 	 * * 代表0或多个任意字符
 	 * 对应的查询字符串为：title:lu*n?
@@ -129,18 +142,18 @@ public class QueryTest {
 	}
 	
 	/**
-	 *  模糊查询
+	 *  模糊查询 完
 	 *  对应的查询字符串为：title:lucenX~1
 	 */
 	@Test
 	public void testFuzzyQuery(){ 
 		//最后一个参数为最小相似度,标识有多少的写对了就查询出来
-		Query query=new FuzzyQuery(new Term("title","lucenX"),1); 
+		Query query=new FuzzyQuery(new Term("title","lucenX")); 
 		searchAndShowResult(query);
 	}
 	
 	/*
-	 * 短语查询
+	 * 短语查询 完
 	 * 对应的查询字符串为：title:"lucene 框架"~5
 	 */
 	@Test
@@ -153,7 +166,7 @@ public class QueryTest {
 	}
 	
 	/**
-	 * 布尔查询
+	 * 布尔查询 完
 	 */
 	@Test
 	public void testBooleanQuery() {
@@ -171,13 +184,13 @@ public class QueryTest {
 		
 		//第二种
 		//对应的查询字符串为：+*:* -id:[5 TO 15}，+*:* NOT id:[5 TO 15}
-		//booleanQuery.add(query1,Occur.MUST);
-		//booleanQuery.add(query2,Occur.MUST_NOT);
+		booleanQuery.add(query1,Occur.MUST);
+		booleanQuery.add(query2,Occur.MUST_NOT);
 		
 		//第二种
 		//对应的查询字符串为：*:* id:[5 TO 15},
-		booleanQuery.add(query1,Occur.SHOULD);
-		booleanQuery.add(query2,Occur.SHOULD);
+		//booleanQuery.add(query1,Occur.SHOULD);
+		//booleanQuery.add(query2,Occur.SHOULD);
 		searchAndShowResult(booleanQuery);
 		
 		

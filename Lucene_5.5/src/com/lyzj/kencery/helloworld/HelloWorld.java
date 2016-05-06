@@ -54,7 +54,7 @@ public class HelloWorld {
 		/** Store参数说明
 			No 本字段的原始值不存储
 			YES 本字段的原始值会存在出在数据库区中
-		如果不存在出，则搜索出来的结果中这个字段的值为null */
+		如果不存在，则搜索出来的结果中这个字段的值为null */
 		
 		/** 
 	     * 自Lucene4开始 创建field对象使用不同的类型 只需要指定是否需要保存源数据 不需指定分词类别  
@@ -120,5 +120,6 @@ public class HelloWorld {
 		for (Article article : articles) {
 			System.out.println("查询结果为："+article);
 		}
+		indexSearcher.getIndexReader().close();
 	}
 }
